@@ -1,0 +1,28 @@
+<div>
+{{#if this.length}}
+    <table class="table">
+        <thead>
+        <tr>            
+            <th>Id</th>
+            <th>League</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Winner</th>
+        </tr>
+        <body>
+            {{#each .}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{competition.name}}</td>
+                    <td>{{homeTeam.name}}</td>
+                    <td>{{awayTeam.name}}</td>
+                    <td>{{score.winner}}</td>
+                </tr>
+            {{/each}}   
+        </body>
+        </thead>
+    </table>
+{{else}}
+    <div>No matches have been found that were played between these dates.</div>
+{{/if}}
+</div>

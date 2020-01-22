@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg">
+    <ul class="navbar-nav mr-auto nav-pills">
+        <li class="nav-item">
+            <a id='nav#indexFOCA' class="nav-link" href="#indexFOCA">Home</a>
+        </li>
+        <li class="nav-item">
+            <a id='nav#getLeaguesList' class="nav-link" href="#getLeaguesList">Get Competitions<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a id="nav#getLeagueTeams" class="nav-link" href="#getLeagueTeams">Get Teams<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a id='nav#createGroup' class="nav-link" href="#createGroup">Create Group<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a id="nav#editGroup" class="nav-link" href="#editGroup">Edit Group<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a id='nav#getGroupsList' class="nav-link" href="#getGroupsList">Get All Groups<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a id="nav#getGroup" class="nav-link" href="#getGroup">Get Group Details<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a id="nav#addTeamToGroup" class="nav-link" href="#addTeamToGroup">Add Team To Group<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a id='nav#removeTeamFromGroup' class="nav-link" href="#removeTeamFromGroup">Remove Team From Group<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a id="nav#getMatchesBetweenDatesFromGroup" class="nav-link" href="#getMatchesBetweenDatesFromGroup">Get Matches Between Dates<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" id="liAuth">
+            {{#if auth}}
+                <a id="nav#signout" href="#signout" class="nav-link">Sign Out</a>
+            {{else}}
+                <a id="nav#login" href="#login" class="nav-link">Login</a>
+            {{/if}}
+        </li>
+        {{#if auth}}
+            <span class="navbar-text">
+                {{fullname}}
+            </span>
+        {{/if}}
+    </ul>
+</nav>
+

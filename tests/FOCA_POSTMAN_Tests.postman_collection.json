@@ -1,0 +1,709 @@
+{
+	"info": {
+		"_postman_id": "fc7351a1-4daf-4d1c-8f3d-598b46a73b69",
+		"name": "FOCA_POSTMAN_Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test FOCA Server Signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe1aebaf-2aa5-4395-abc3-0f219c505669",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Signup successfull.\", () => {",
+							"    let obj = pm.response.json()",
+							"    pm.expect(obj.fullname).to.equal(\"postman\")",
+							"    pm.expect(obj.username).to.equal(\"postmanusr\")",
+							"    pm.expect(obj.password).to.equal(\"postman123\")",
+							"    ",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullname\": \"postman\",\r\n    \"username\": \"postmanusr\",\r\n    \"password\": \"postman123\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f17d869-d68c-4f7d-9138-797cffb86bed",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Logout successfull.\", () => {",
+							"    pm.expect(pm.response.text()).to.equal(\"User logout successfull.\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "605d1100-7ad0-4057-b132-a1ba4ee9ec5a",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"postmanusr\",\r\n    \"password\": \"postman123\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server GetLeaguesList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69016301-ce38-4054-b7a2-25171c5f04eb",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Leagues are present!\", () => {",
+							"    let obj = pm.response.json()",
+							"    let existLeagues = [\"WC Qualification\", \"Supercopa Argentina\", \"Primera B Nacional\"]",
+							"    pm.expect(existLeagues.every(league => obj.map(comp => comp.name).includes(league))).to.equal(true)",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/leagues",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"leagues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server GetLeagueTeams",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fb8c46a4-7198-4119-a1ea-22380576ca33",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Leagues are present!\", () => {",
+							"    let obj = pm.response.json()",
+							"    let existTeams = [\"Uruguay\", \"Germany\", \"Spain\", \"Argentina\", \"Brazil\", \"Portugal\"]",
+							"    pm.expect(existTeams.every(team => obj.map(tm => tm.name).includes(team))).to.equal(true)",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/leagues/2000/teams",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"leagues",
+						"2000",
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server CreateGroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f253a53d-f64a-4a76-8b97-626020dc8741",
+						"exec": [
+							"pm.test(\"Status code is 201\", () => {",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"",
+							"pm.globals.set(\"groupid\", pm.response.text());",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"World group\",\n\t\"description\" : \"Contains teams from all over the world!\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/groups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"groups"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Test FOCA Server CreateGroup",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"goodname\",\n\t\"description\" : \"example description \"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/foca/groups/addgroup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"foca",
+								"groups",
+								"addgroup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "text/plain"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Nov 2018 15:15:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						}
+					],
+					"cookie": [],
+					"body": "The generated id is: z2ekDWcB_Ouopti6urVH"
+				}
+			]
+		},
+		{
+			"name": "Test FOCA Server EditGroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a45251c6-205d-4523-a1e8-a496bc747e26",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"Europe group\",\n\t\"description\" : \"Contains teams from Europe!\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/groups/{{groupid}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"groups",
+						"{{groupid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server GetGroupsList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9de8bdaf-f057-4363-851d-0452cbc3a3d2",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"The previously created group exists\", () => {",
+							"    let objarr = pm.response.json()",
+							"    pm.expect(objarr.some(obj => ",
+							"    obj.name == \"Europe group\" && ",
+							"    obj.description == \"Contains teams from Europe!\")).to.equal(true)",
+							"})",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/groups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server GetGroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b65d2a3-3140-4642-9ae9-98c6771d337e",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"The group has been retrieved successfully.\", () => {",
+							"    let obj = pm.response.json()",
+							"    pm.expect(obj.name).to.equal(\"Europe group\")",
+							"    pm.expect(obj.description).to.equal(\"Contains teams from Europe!\")",
+							"    ",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/groups/{{groupid}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"groups",
+						"{{groupid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server AddTeamToGroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f79c10eb-18f4-4075-a3b7-df930e46b5f0",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"The team has been successfully added or already exists.\", () => {",
+							"    let text = pm.response.text()",
+							"    pm.expect(text == \"The team has been added successfully!\" || text == \"The team already exists in this group.\").to.equal(true)",
+							"    ",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 18,\n\t\"name\": \"Borussia Mönchengladbach\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/groups/{{groupid}}/teams",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"groups",
+						"{{groupid}}",
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server GetGameBetweenDatesFromGroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e9e150b6-6d83-45c1-bd05-da9eaf88f630",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/groups?groupid={{groupid}}&date1=2015-5-17&date2=2019-8-30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"groups"
+					],
+					"query": [
+						{
+							"key": "groupid",
+							"value": "{{groupid}}"
+						},
+						{
+							"key": "date1",
+							"value": "2015-5-17"
+						},
+						{
+							"key": "date2",
+							"value": "2019-8-30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server RemoveTeamFromGroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "137b2a81-d3a4-41f3-8938-59b47a4efd89",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"The team has been removed successfully.\", () => {",
+							"    let text = pm.response.text()",
+							"    pm.expect(text == \"The team has been removed successfully!\").to.equal(true)",
+							"    ",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/groups?groupid={{groupid}}&teamid=18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"groups"
+					],
+					"query": [
+						{
+							"key": "groupid",
+							"value": "{{groupid}}"
+						},
+						{
+							"key": "teamid",
+							"value": "18"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test FOCA Server Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bfa13773-1ffd-4280-b933-16d69e2f8288",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Logout successfull.\", () => {",
+							"    pm.expect(pm.response.text()).to.equal(\"User logout successfull.\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/foca/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"foca",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

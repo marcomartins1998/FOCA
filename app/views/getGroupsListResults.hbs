@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>            
+        <th>Name</th>
+        <th>Description</th>
+        <th>Teams</th>
+    </tr>
+    <body>
+        {{#each .}}
+            <tr>
+                <td>{{_id}}</td>
+                <td>{{name}}</td>
+                <td>{{description}}</td>
+                <td>{{teams}}</td>
+            </tr>
+        {{/each}}
+    </body>
+    </thead>
+</table>
